@@ -59,21 +59,26 @@ function hydrateArticle(article) {
   hydrateColors(article);
 
   const colorSelect = document.querySelector("#colors");
+  const quantitySelect = document.querySelector("#quantity");
 
   const btn_addToCart = document.querySelector("#addToCart");
   btn_addToCart.addEventListener("click", (event) => {
     event.preventDefault();
     const selectedColor = colorSelect.value;
-    if (selectedColor === 0) {
+    const selectedQuantity = quantitySelect.value;
+    if (selectedColor === "" || selectedColor === "0") {
       alert("Sélectionner une couleur valide avant de continuer");
+    } else if (selectedQuantity === "" || selectedQuantity === "0") {
+      alert("sélectionner une quantité valide avant de continuer");
     } else {
+      const userValue = {
+        productName: article.name,
+        Idproduct: article._id,
+        colors: selectedColor,
+        price: article.price,
+        quantity: selectedQuantity,
+      };
+      console.log(userValue);
     }
-    const userValue = {
-      productName: article.name,
-      Idproduct: article._id,
-      colors: selectedColor,
-      price: article.price,
-    };
-    console.log(userValue);
   });
 }
