@@ -78,11 +78,21 @@ function hydrateArticle(article) {
         price: article.price,
         quantity: selectedQuantity,
       };
-      console.log(userValue);
+      let localStorageData = JSON.parse(localStorage.getItem("product"));
+      // JSON.parse sert à convertir les données au format JSON dans le local storage en objet javascript
+      console.log(localStorageData);
+      // Si il y a déjà des produits dans le local storage
+      if (localStorageData) {
+        localStorageData.push(userValue);
+        localStorage.setItem("product", JSON.stringify(localStorageData));
+        console.log(localStorageData);
+      }
+      // Si il n'yen a pas
+      else {
+        localStorageData = [];
+        localStorageData.push(userValue);
+        localStorage.setItem("product", JSON.stringify(localStorageData));
+      }
     }
   });
 }
-
-const localStorageData = JSON.parse(localStorage.getItem("product"));
-// JSON.parse sert à convertir les données au format JSON dans le local storage en objet javascript
-console.log(localStorageData);
