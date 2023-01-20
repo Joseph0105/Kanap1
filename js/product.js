@@ -82,3 +82,7 @@ function hydrateArticle(article) {
     }
   });
 }
+
+const localStorageData = JSON.parse(localStorage.getItem("product"));
+// JSON.parse sert à convertir les données au format JSON dans le local storage en objet javascript
+console.log(localStorageData);
