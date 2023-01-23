@@ -80,18 +80,31 @@ function hydrateArticle(article) {
       };
       let localStorageData = JSON.parse(localStorage.getItem("product"));
       // JSON.parse sert à convertir les données au format JSON dans le local storage en objet javascript
-      console.log(localStorageData);
+
+      const confirmMessage = () => {
+        if (
+          window.confirm(
+            `${selectedQuantity} ${article.name} de couleur ${selectedColor} a bien été ajouté au panier`
+          )
+        ) {
+          window.location.href = "../html/cart.html";
+        } else {
+          window.location.href = "../html/index.html";
+        }
+      };
       // Si il y a déjà des produits dans le local storage
       if (localStorageData) {
         localStorageData.push(userValue);
         localStorage.setItem("product", JSON.stringify(localStorageData));
         console.log(localStorageData);
+        confirmMessage();
       }
       // Si il n'yen a pas
       else {
         localStorageData = [];
         localStorageData.push(userValue);
         localStorage.setItem("product", JSON.stringify(localStorageData));
+        confirmMessage();
       }
     }
   });
