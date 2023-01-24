@@ -65,3 +65,16 @@ function createArticle(userValue) {
 }
 
 createArticle(userValue);
+
+let total = 0;
+for (let u = 0; u < userValue.length; u++) {
+  let product = userValue[u];
+  total += product.quantity * product.price;
+}
+console.log(total);
+
+let totalQuantity = document.getElementById("totalQuantity");
+totalQuantity.textContent = userValue.length;
+
+let totalPrice = document.getElementById("totalPrice");
+totalPrice.textContent = total;
