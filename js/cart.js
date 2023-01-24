@@ -78,3 +78,29 @@ totalQuantity.textContent = userValue.length;
 
 let totalPrice = document.getElementById("totalPrice");
 totalPrice.textContent = total;
+
+// Formulaire
+
+let fields = ["firstName", "lastName"];
+
+// let orderSubmit = document.getElementById("order");
+
+// orderSubmit.addEventListener("click", function (e) {
+//   let orderfirstName = document.getElementById("firstName");
+//   let regExFirstName = /^[a-zA-ZÀ-ÿ\-\s]+$/;
+
+//   if (orderfirstName.value.trim() == "") {
+//     let required = document.getElementById("required");
+//     required.innerHTML = "Veuillez renseigner votre prénom";
+//     required.style.color = "red";
+//     e.preventDefault();
+//   } else if (regExFirstName.test(orderfirstName.value) == false) {
+//     let required = document.getElementById("required");
+//     required.innerHTML =
+//       "le nom doit comporter uniquement des lettres et tirets.";
+//     required.style.color = "red";
+//     e.preventDefault();
+//   } else {
+//     required.style.display = "none";
+//   }
+// });
