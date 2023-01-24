@@ -72,6 +72,7 @@ function hydrateArticle(article) {
       alert("sélectionner une quantité valide avant de continuer");
     } else {
       const userValue = {
+        imageUrl: article.imageUrl,
         productName: article.name,
         Idproduct: article._id,
         colors: selectedColor,
