@@ -99,6 +99,7 @@ let regExs = [
   /^0[1-68]([-. ]?\d{2}){4}$/,
 ];
 let errorMsgs = [
+  "Veuillez remplir le champ prénom",
   "Veuillez remplir le champ Nom",
   "Veuillez remplir le champ Adresse",
   "Veuillez remplir le champ Ville",
@@ -114,9 +115,8 @@ let errorMsgsRegEx = [
   "l'email est invalide.",
   "le numéro de téléphone est invalide.",
 ];
-function validateForm() {}
 let form = document.getElementById("cart__order__form");
-form.addEventListener("submit", function (event) {
+function validateForm() {
   let isFormValid = true;
   for (let p = 0; p < fields.length; p++) {
     let fieldEvent = document.getElementById(fields[p]);
@@ -135,29 +135,32 @@ form.addEventListener("submit", function (event) {
       spanEvent.innerHTML = "";
     }
   }
-  if (isFormValid) {
-    alert("good");
+  // if (isFormValid) {
+  //   alert("good");
+  // } else {
+  //   alert("erreur");
+  // }
+}
+
+form.addEventListener("submit", validateForm);
+
+for (let j = 0; j < fields.length; j++) {
+  let field = document.getElementById(fields[j]);
+  field.addEventListener("blur", function () {
+    validateField(j);
+  });
+}
+
+function validateField(index) {
+  let fieldEvent = document.getElementById(fields[index]);
+  let spanEvent = document.getElementById(spans[index]);
+  if (fieldEvent.value.trim() == "") {
+    spanEvent.innerHTML = errorMsgs[index];
+    spanEvent.style.color = "red";
+  } else if (!regExs[index].test(fieldEvent.value)) {
+    spanEvent.innerHTML = errorMsgsRegEx[index];
+    spanEvent.style.color = "red";
   } else {
-    alert("erreur");
+    spanEvent.innerHTML = "";
   }
-});
-
-// orderSubmit.addEventListener("click", function (e) {
-//   let orderfirstName = document.getElementById("firstName");
-//   let regExFirstName = /^[a-zA-ZÀ-ÿ\-\s]+$/;
-
-//   if (orderfirstName.value.trim() == "") {
-//     let required = document.getElementById("required");
-//     required.innerHTML = "Veuillez renseigner votre prénom";
-//     required.style.color = "red";
-//     e.preventDefault();
-//   } else if (regExFirstName.test(orderfirstName.value) == false) {
-//     let required = document.getElementById("required");
-//     required.innerHTML =
-//       "le nom doit comporter uniquement des lettres et tirets.";
-//     required.style.color = "red";
-//     e.preventDefault();
-//   } else {
-//     required.style.display = "none";
-//   }
-// });
+}
