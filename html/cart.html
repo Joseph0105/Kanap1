@@ -134,7 +134,7 @@
                   <label for="firstName">Prénom: </label>
                   <input type="text" name="firstName" id="firstName" />
 
-                  <span id="required"></span>
+                  <span id="requiredFirstName"></span>
 
                   <!-- <p id="firstNameErrorMsg">
                     ci est un message d'erreur
@@ -142,31 +142,30 @@
                 </div>
                 <div class="cart__order__form__question">
                   <label for="lastName">Nom: </label>
-                  <input type="text" name="lastName" id="lastName" required />
+                  <input type="text" name="lastName" id="lastName" />
+                  <span id="requiredLastName"></span>
                   <p id="lastNameErrorMsg"></p>
                 </div>
                 <div class="cart__order__form__question">
                   <label for="address">Adresse: </label>
-                  <input type="text" name="address" id="address" required />
-                  <p id="addressErrorMsg"></p>
+                  <input type="text" name="address" id="address" />
+                  <span id="requiredAddress"></span>
                 </div>
                 <div class="cart__order__form__question">
                   <label for="city">Ville: </label>
-                  <input type="text" name="city" id="city" required />
-                  <p id="cityErrorMsg"></p>
+                  <input type="text" name="city" id="city" />
+                  <span id="requiredCity"></span>
                 </div>
                 <div class="cart__order__form__question">
                   <label for="email">Email: </label>
-                  <input type="email" name="email" id="email" required />
+                  <input type="email" name="email" id="email" />
+                  <span id="requiredEmail"></span>
+
                   <br />
                   <label for="téléphone">Téléphone: </label>
-                  <input
-                    type="téléphone"
-                    name="téléphone"
-                    id="téléphone"
-                    required
-                  />
-                  <p id="emailErrorMsg"></p>
+                  <input type="téléphone" name="téléphone" id="phone" />
+                  <span id="requiredPhone"></span>
+                  <p id="phoneErrorMsg"></p>
                 </div>
                 <div class="cart__order__form__submit">
                   <input type="submit" value="Commander !" id="order" />

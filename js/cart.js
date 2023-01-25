@@ -80,9 +80,68 @@ let totalPrice = document.getElementById("totalPrice");
 totalPrice.textContent = total;
 
 // Formulaire
+let isValid = true;
+let fields = ["firstName", "lastName", "address", "city", "email", "phone"];
+let spans = [
+  "requiredFirstName",
+  "requiredLastName",
+  "requiredAddress",
+  "requiredCity",
+  "requiredEmail",
+  "requiredPhone",
+];
+let regExs = [
+  /^[a-zA-ZÀ-ÿ\-\s]+$/,
+  /^[a-zA-ZÀ-ÿ\-\s]+$/,
+  /^[a-zA-ZÀ-ÿ\d\-\s]+$/,
+  /^[a-zA-ZÀ-ÿ\-\s]+$/,
+  /^\S+@\S+$/,
+  /^0[1-68]([-. ]?\d{2}){4}$/,
+];
+let errorMsgs = [
+  "Le prénom ne doit pas comprter de chiffre ou de caractères spéciaux (#@}=+ etc...",
+  "Le nom ne doit pas comprter de chiffre ou de caractères spéciaux (#@}=+ etc...",
+  "L'adresse' ne doit pas comprter de caractères spéciaux (#@}=+ etc...",
+  "La ville ne doit pas comprter de chiffre ou de caractères spéciaux (#@}=+ etc...",
+  "l'email est invalide.",
+  "le numéro de téléphone est invalide.",
+];
 
-let fields = ["firstName", "lastName"];
+let orderSubmit = document.getElementById("order");
+orderSubmit.addEventListener("click", function (e) {
+  for (let p = 0; p < fields.length; p++) {
+    let span = document.getElementById(spans[p]);
+    let field = document.getElementById(fields[p]);
+    let regEx = regExs[p];
+    let errorMsg = errorMsgs[p];
 
+    if (field.value.trim() == "") {
+      let required = document.getElementById(span);
+      required.innerHTML = "Tous les champs doivent être remplis";
+      required.style.color = "red";
+      isValid = false;
+    } else if (regEx.test(field.value) == false) {
+      let required = document.getElementById(span[p]);
+      required.innerHTML = errorMsg;
+      required.style.color = "red";
+    } else {
+      let required = document.getElementById(span[p]);
+      required.innerHTML = "";
+      required.style.color = "green";
+    }
+  }
+  if (
+    document.getElementById("firstName").innerHTML == "" &&
+    document.getElementById("lastName").innerHTML == "" &&
+    document.getElementById("address").innerHTML == "" &&
+    document.getElementById("city").innerHTML == "" &&
+    document.getElementById("email").innerHTML == "" &&
+    document.getElementById("phone").innerHTML == ""
+  ) {
+    alert("Votre commande a été soumise avec succès");
+    e.preventDefault();
+  }
+});
 // let orderSubmit = document.getElementById("order");
 
 // orderSubmit.addEventListener("click", function (e) {
