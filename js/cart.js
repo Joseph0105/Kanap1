@@ -80,7 +80,7 @@ let totalPrice = document.getElementById("totalPrice");
 totalPrice.textContent = total;
 
 // Formulaire
-let isValid = true;
+
 let fields = ["firstName", "lastName", "address", "city", "email", "phone"];
 let spans = [
   "requiredFirstName",
@@ -95,10 +95,18 @@ let regExs = [
   /^[a-zA-ZÀ-ÿ\-\s]+$/,
   /^[a-zA-ZÀ-ÿ\d\-\s]+$/,
   /^[a-zA-ZÀ-ÿ\-\s]+$/,
-  /^\S+@\S+$/,
+  /^\S+@[^\s]+.[^\s]+$/,
   /^0[1-68]([-. ]?\d{2}){4}$/,
 ];
 let errorMsgs = [
+  "Veuillez remplir le champ Nom",
+  "Veuillez remplir le champ Adresse",
+  "Veuillez remplir le champ Ville",
+  "Veuillez remplir le champ Email",
+  "Veuillez remplir le champ Téléphone",
+];
+
+let errorMsgsRegEx = [
   "Le prénom ne doit pas comprter de chiffre ou de caractères spéciaux (#@}=+ etc...",
   "Le nom ne doit pas comprter de chiffre ou de caractères spéciaux (#@}=+ etc...",
   "L'adresse' ne doit pas comprter de caractères spéciaux (#@}=+ etc...",
@@ -106,43 +114,33 @@ let errorMsgs = [
   "l'email est invalide.",
   "le numéro de téléphone est invalide.",
 ];
-
-let orderSubmit = document.getElementById("order");
-orderSubmit.addEventListener("click", function (e) {
+function validateForm() {}
+let form = document.getElementById("cart__order__form");
+form.addEventListener("submit", function (event) {
+  let isFormValid = true;
   for (let p = 0; p < fields.length; p++) {
-    let span = document.getElementById(spans[p]);
-    let field = document.getElementById(fields[p]);
-    let regEx = regExs[p];
-    let errorMsg = errorMsgs[p];
-
-    if (field.value.trim() == "") {
-      let required = document.getElementById(span);
-      required.innerHTML = "Tous les champs doivent être remplis";
-      required.style.color = "red";
-      isValid = false;
-    } else if (regEx.test(field.value) == false) {
-      let required = document.getElementById(span[p]);
-      required.innerHTML = errorMsg;
-      required.style.color = "red";
+    let fieldEvent = document.getElementById(fields[p]);
+    let spanEvent = document.getElementById(spans[p]);
+    if (fieldEvent.value.trim() == "") {
+      spanEvent.innerHTML = errorMsgs[p];
+      spanEvent.style.color = "red";
+      isFormValid = false;
+      event.preventDefault();
+    } else if (!regExs[p].test(fieldEvent.value)) {
+      spanEvent.innerHTML = errorMsgsRegEx[p];
+      spanEvent.style.color = "red";
+      isFormValid = false;
+      event.preventDefault();
     } else {
-      let required = document.getElementById(span[p]);
-      required.innerHTML = "";
-      required.style.color = "green";
+      spanEvent.innerHTML = "";
     }
   }
-  if (
-    document.getElementById("firstName").innerHTML == "" &&
-    document.getElementById("lastName").innerHTML == "" &&
-    document.getElementById("address").innerHTML == "" &&
-    document.getElementById("city").innerHTML == "" &&
-    document.getElementById("email").innerHTML == "" &&
-    document.getElementById("phone").innerHTML == ""
-  ) {
-    alert("Votre commande a été soumise avec succès");
-    e.preventDefault();
+  if (isFormValid) {
+    alert("good");
+  } else {
+    alert("erreur");
   }
 });
-// let orderSubmit = document.getElementById("order");
 
 // orderSubmit.addEventListener("click", function (e) {
 //   let orderfirstName = document.getElementById("firstName");
