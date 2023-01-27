@@ -64,8 +64,6 @@ function createArticle(userValue) {
   }
 }
 
-createArticle(userValue);
-
 let total = 0;
 for (let u = 0; u < userValue.length; u++) {
   let product = userValue[u];
@@ -115,9 +113,14 @@ let errorMsgsRegEx = [
   "l'email est invalide.",
   "le numéro de téléphone est invalide.",
 ];
+
+const userData = {
+  firstName: document.getElementById("firstName").value,
+};
 let form = document.getElementById("cart__order__form");
-function validateForm() {
-  let isFormValid = true;
+let isFormValid = true;
+function validateForm(event) {
+  isFormValid = true;
   for (let p = 0; p < fields.length; p++) {
     let fieldEvent = document.getElementById(fields[p]);
     let spanEvent = document.getElementById(spans[p]);
@@ -135,14 +138,9 @@ function validateForm() {
       spanEvent.innerHTML = "";
     }
   }
-  // if (isFormValid) {
-  //   alert("good");
-  // } else {
-  //   alert("erreur");
-  // }
-}
 
-form.addEventListener("submit", validateForm);
+  // Récupération des données utilisateur
+}
 
 for (let j = 0; j < fields.length; j++) {
   let field = document.getElementById(fields[j]);
@@ -164,3 +162,25 @@ function validateField(index) {
     spanEvent.innerHTML = "";
   }
 }
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  var userData = {};
+  for (var i = 0; i < form.elements.length; i++) {
+    var field = form.elements[i];
+    if (field.name) {
+      userData[field.name] = field.value;
+    }
+  }
+  console.log(userData);
+});
+
+const promise = fetch("http://localhost:3000/api/productCtrl.orderProducts", {
+  method: "POST",
+  body: JSON.stringify(userData),
+  header: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Envoie de la commande au Back-End
