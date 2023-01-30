@@ -163,24 +163,54 @@ function validateField(index) {
   }
 }
 
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-  var userData = {};
-  for (var i = 0; i < form.elements.length; i++) {
-    var field = form.elements[i];
-    if (field.name) {
-      userData[field.name] = field.value;
-    }
-  }
-  console.log(userData);
-});
+form.addEventListener("click", (e) => {
+  if (
+    !firstName.value ||
+    !lastName.value ||
+    !address.value ||
+    !city.value ||
+    !email.value
+    // !phone.value
+  ) {
+    errorMsgsRegEx;
+    e.preventDefault();
+  } else if (isNaN(phone.value)) {
+    errorMsgsRegEx;
+    e.preventDefault();
+  } else {
+    e.preventDefault();
+    const order = {
+      contact: {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        address: address.value,
+        city: city.value,
+        email: email.value,
+        // phone: phone.value,
+      },
+    };
+    console.log(order);
 
-const promise = fetch("http://localhost:3000/api/productCtrl.orderProducts", {
-  method: "POST",
-  body: JSON.stringify(userData),
-  header: {
-    "Content-Type": "application/json",
-  },
+    const options = {
+      method: "POST",
+      body: JSON.stringify(order),
+      headers: { "Content-Type": "application/json" },
+    };
+    let priceConfirmation = document.getElementById("totalPrice").innerText;
+    priceConfirmation = priceConfirmation.split(" :");
+
+    fetch("http://localhost:3000/api/products/order", options)
+      .then((response) => response.json())
+      .then((data) => {
+        localStorage.clear();
+        console.log(data);
+        localStorage.setItem("orderId", data.orderId);
+        localStorage.setItem("totalPrice", priceConfirmation[1]);
+      })
+      .catch((err) => {
+        alert("Il y a une erreur : " + err);
+      });
+  }
 });
 
 // Envoie de la commande au Back-End
