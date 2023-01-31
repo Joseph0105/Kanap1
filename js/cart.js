@@ -77,6 +77,7 @@ totalQuantity.textContent = userValue.length;
 let totalPrice = document.getElementById("totalPrice");
 totalPrice.textContent = total;
 
+createArticle(userValue);
 // Formulaire
 
 let fields = ["firstName", "lastName", "address", "city", "email", "phone"];
@@ -179,6 +180,9 @@ form.addEventListener("click", (e) => {
     e.preventDefault();
   } else {
     e.preventDefault();
+
+    let productsOrder = [];
+
     const order = {
       contact: {
         firstName: firstName.value,
@@ -188,6 +192,7 @@ form.addEventListener("click", (e) => {
         email: email.value,
         // phone: phone.value,
       },
+      products: userValue,
     };
     console.log(order);
 
@@ -195,6 +200,7 @@ form.addEventListener("click", (e) => {
       method: "POST",
       body: JSON.stringify(order),
       headers: { "Content-Type": "application/json" },
+      products: userValue,
     };
     let priceConfirmation = document.getElementById("totalPrice").innerText;
     priceConfirmation = priceConfirmation.split(" :");
