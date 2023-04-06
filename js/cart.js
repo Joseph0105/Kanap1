@@ -207,6 +207,9 @@ form.addEventListener('submit', (e) => {
     priceConfirmation = priceConfirmation.split(' :');
     console.log(priceConfirmation);
 
+    // On envoie les données dans le local storage et le backend les récupère.
+    // L'orderId lui est stocké dans l'URL pour des raison de sécurité
+
     fetch('http://localhost:3000/api/products/order', options)
       .then((response) => response.json())
       .then((data) => {
@@ -215,7 +218,6 @@ form.addEventListener('submit', (e) => {
         console.log(data);
         localStorage.setItem('contact', JSON.stringify(order.contact));
         localStorage.setItem('products', JSON.stringify(products));
-        // localStorage.setItem('orderId', data.orderId);
         localStorage.setItem('totalPrice', priceConfirmation);
         window.location.href = 'confirmation.html?orderId=' + orderId;
       })
