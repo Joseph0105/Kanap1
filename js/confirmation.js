@@ -1,63 +1,9 @@
-displayOrderId();
-displayUserData();
-getProductsApi();
-getLocalStorage();
-const userData = document.querySelector('.contact');
-const price = document.querySelector('.price');
-
-const products = document.querySelector('.products');
-const productImg = document.querySelector('.product-img');
-
-function getLocalStorage() {
-  const productId = JSON.parse(localStorage.getItem('products'));
-
-  if (productId) {
-    getProductsApi(productId);
-  } else {
-    alert('No product found in local storage');
-  }
+function displayOrderId() {
+  const orderId = document.querySelector('#orderId');
+  const params = new URLSearchParams(window.location.search);
+  const idUrl = params.get('orderId');
+  orderId.textContent = idUrl;
 }
-
-function getProductsApi(productId) {
-  if (!productId) {
-    return;
-  }
-  const queryString = productId.join('&id=');
-
-  return fetch(`http://localhost:3000/api/products?id=${queryString}`)
-    .then((response) => {
-      return response.json();
-    })
-    .then((article) => {
-      const filteredArticles = article.filter((article) =>
-        productId.includes(article._id)
-      );
-      console.log(filteredArticles);
-      filteredArticles.forEach((article) => {
-        const product = document.createElement('div');
-        const productName = document.createElement('p');
-
-        const productImg = document.createElement('img');
-
-        productName.textContent = article.name;
-
-        productImg.src = article.imageUrl;
-        productImg.alt = article.altTxt;
-
-        product.appendChild(productName);
-        product.appendChild(productImg);
-        products.appendChild(product);
-      });
-      return article;
-    })
-    .catch((error) => {
-      alert(error);
-    });
-}
-
-const priceInStorage = localStorage.getItem('totalPrice');
-
-price.textContent = `${priceInStorage}€`;
 
 function displayUserData() {
   const firstName = document.querySelector('.firstName');
@@ -71,14 +17,45 @@ function displayUserData() {
   firstName.textContent = userDataInStorage.firstName;
   Name.textContent = userDataInStorage.lastName;
   address.textContent = `${userDataInStorage.address}, ${userDataInStorage.city}`;
-  mail.textContent = userDataInStorage.mail;
-  phone.textContent = userDataInStorage.phone;
   mail.textContent = userDataInStorage.email;
+  phone.textContent = userDataInStorage.phone;
 }
 
-function displayOrderId() {
-  const orderId = document.querySelector('#orderId');
-  const params = new URLSearchParams(window.location.search);
-  const idUrl = params.get('orderId');
-  orderId.textContent = idUrl;
+function displayProducts() {
+  const products = document.querySelector('.products');
+
+  const userValue = JSON.parse(localStorage.getItem('userValue'));
+
+  userValue.forEach((product) => {
+    const productDiv = document.createElement('div');
+    const productQte = document.createElement('p');
+    const productName = document.createElement('p');
+    const productColor = document.createElement('p');
+
+    const productImg = document.createElement('img');
+
+    productQte.textContent = product.quantity;
+    productName.textContent = product.productName;
+    productColor.textContent = product.colors;
+
+    productImg.src = product.imageUrl;
+    productImg.alt = "photographie d'un canapé";
+
+    productDiv.appendChild(productName);
+    productDiv.appendChild(productColor);
+    productDiv.appendChild(productQte);
+    productDiv.appendChild(productImg);
+    products.appendChild(productDiv);
+  });
 }
+
+function displayPrice() {
+  const price = document.querySelector('.price');
+  const priceInLocalStorage = localStorage.getItem('totalPrice');
+  price.textContent = `${priceInLocalStorage}€`;
+}
+
+displayOrderId();
+displayUserData();
+displayProducts();
+displayPrice();

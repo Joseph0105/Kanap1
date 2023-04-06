@@ -7,6 +7,7 @@ if (userValueInStorage) {
 } else {
   window.alert(`Votre panier est vide, Remplissez le d'abbord.`);
 }
+let color = document.createElement('p');
 function createArticle(userValue) {
   const parentElement = document.getElementById('cart__items');
   for (let i = 0; i < userValue.length; i++) {
@@ -31,7 +32,6 @@ function createArticle(userValue) {
     title.textContent = product.productName;
     cartCreat.appendChild(title);
 
-    let color = document.createElement('p');
     color.textContent = product.colors;
     cartCreat.appendChild(color);
 
@@ -218,6 +218,8 @@ form.addEventListener('submit', (e) => {
         console.log(data);
         localStorage.setItem('contact', JSON.stringify(order.contact));
         localStorage.setItem('products', JSON.stringify(products));
+        localStorage.setItem('userValue', JSON.stringify(userValue));
+
         localStorage.setItem('totalPrice', priceConfirmation);
         window.location.href = 'confirmation.html?orderId=' + orderId;
       })
