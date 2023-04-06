@@ -1,5 +1,5 @@
 function getArticleId() {
-  return new URL(location.href).searchParams.get("id");
+  return new URL(location.href).searchParams.get('id');
 }
 
 function getArticle(articleId) {
