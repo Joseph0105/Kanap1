@@ -34,12 +34,18 @@ function displayProducts() {
 
     const productImg = document.createElement('img');
 
-    productQte.textContent = product.quantity;
+    productQte.textContent = 'Quantité: ' + product.quantity;
     productName.textContent = product.productName;
     productColor.textContent = product.colors;
 
     productImg.src = product.imageUrl;
     productImg.alt = "photographie d'un canapé";
+
+    productDiv.classList.add('product');
+    productQte.classList.add('product-qte');
+    productName.classList.add('product-name');
+    productColor.classList.add('product-color');
+    productImg.classList.add('product-img');
 
     productDiv.appendChild(productName);
     productDiv.appendChild(productColor);

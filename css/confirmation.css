@@ -25,7 +25,42 @@ p span {
 ul {
   list-style-type: none;
 }
-.products img {
-  width: 20%;
-  height: 20%;
+p {
+  margin-block-end: 0;
+}
+.products {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1%;
+}
+.product {
+  width: 32%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  margin-bottom: 1%;
+}
+
+.product img {
+  margin-top: 20px;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.product-color {
+  font-style: italic;
+}
+
+.product-quantity {
+  font-weight: bold;
 }
