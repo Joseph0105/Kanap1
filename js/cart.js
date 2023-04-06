@@ -164,7 +164,7 @@ function validateField(index) {
   }
 }
 
-form.addEventListener('click', (e) => {
+form.addEventListener('submit', (e) => {
   if (
     !firstName.value ||
     !lastName.value ||
@@ -210,17 +210,17 @@ form.addEventListener('click', (e) => {
     fetch('http://localhost:3000/api/products/order', options)
       .then((response) => response.json())
       .then((data) => {
+        const orderId = data.orderId;
         localStorage.clear();
         console.log(data);
         localStorage.setItem('contact', JSON.stringify(order.contact));
         localStorage.setItem('products', JSON.stringify(products));
         // localStorage.setItem('orderId', data.orderId);
-        // localStorage.setItem('totalPrice', priceConfirmation);
+        localStorage.setItem('totalPrice', priceConfirmation);
+        window.location.href = 'confirmation.html?orderId=' + orderId;
       })
       .catch((err) => {
         alert('Il y a une erreur : ' + err);
       });
   }
 });
-
-// Envoie de la commande au Back-End
