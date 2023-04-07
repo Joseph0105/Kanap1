@@ -6,7 +6,7 @@
   }
 })();
 function getArticles() {
-  return fetch('http://localhost:3000/api/products')
+  return fetch('https://kanapjosephschneider.herokuapp.com/api/products')
     .then((response) => {
       return response.json();
     })

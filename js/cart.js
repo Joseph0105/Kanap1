@@ -210,7 +210,10 @@ form.addEventListener('submit', (e) => {
     // On envoie les données dans le local storage et le backend les récupère.
     // L'orderId lui est stocké dans l'URL pour des raison de sécurité
 
-    fetch('http://localhost:3000/api/products/order', options)
+    fetch(
+      'https://kanapjosephschneider.herokuapp.com/api/products/order',
+      options
+    )
       .then((response) => response.json())
       .then((data) => {
         const orderId = data.orderId;

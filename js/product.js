@@ -8,11 +8,13 @@ async function main() {
 }
 
 function getArticleId() {
-  return new URL(location.href).searchParams.get("id");
+  return new URL(location.href).searchParams.get('id');
 }
 
 function getArticle(articleId) {
-  return fetch(`http://localhost:3000/api/products/${articleId}`)
+  return fetch(
+    `https://kanapjosephschneider.herokuapp.com/api/products/${articleId}`
+  )
     .then((response) => {
       return response.json();
     })
@@ -25,26 +27,26 @@ function getArticle(articleId) {
 }
 
 function hydrateImage(article) {
-  const image = document.getElementById("img");
+  const image = document.getElementById('img');
   image.src = article.imageUrl;
 }
 
 function hydrateTitle(article) {
-  document.getElementById("title").textContent = article.name;
+  document.getElementById('title').textContent = article.name;
 }
 
 function hydratePrice(article) {
-  document.getElementById("price").textContent = article.price;
+  document.getElementById('price').textContent = article.price;
 }
 
 function hydrateDescription(article) {
-  document.getElementById("description").textContent = article.description;
+  document.getElementById('description').textContent = article.description;
 }
 
 function hydrateColors(article) {
-  const colors = document.getElementById("colors");
+  const colors = document.getElementById('colors');
   article.colors.forEach((color) => {
-    let option = document.createElement("option");
+    let option = document.createElement('option');
     option.value = color;
     option.innerHTML = color;
     colors.appendChild(option);
@@ -58,18 +60,18 @@ function hydrateArticle(article) {
   hydrateDescription(article);
   hydrateColors(article);
 
-  const colorSelect = document.querySelector("#colors");
-  const quantitySelect = document.querySelector("#quantity");
+  const colorSelect = document.querySelector('#colors');
+  const quantitySelect = document.querySelector('#quantity');
 
-  const btn_addToCart = document.querySelector("#addToCart");
-  btn_addToCart.addEventListener("click", (event) => {
+  const btn_addToCart = document.querySelector('#addToCart');
+  btn_addToCart.addEventListener('click', (event) => {
     event.preventDefault();
     const selectedColor = colorSelect.value;
     const selectedQuantity = quantitySelect.value;
-    if (selectedColor === "" || selectedColor === "0") {
-      alert("Sélectionner une couleur valide avant de continuer");
-    } else if (selectedQuantity === "" || selectedQuantity === "0") {
-      alert("sélectionner une quantité valide avant de continuer");
+    if (selectedColor === '' || selectedColor === '0') {
+      alert('Sélectionner une couleur valide avant de continuer');
+    } else if (selectedQuantity === '' || selectedQuantity === '0') {
+      alert('sélectionner une quantité valide avant de continuer');
     } else {
       const userValue = {
         imageUrl: article.imageUrl,
@@ -79,7 +81,7 @@ function hydrateArticle(article) {
         price: article.price,
         quantity: selectedQuantity,
       };
-      let localStorageData = JSON.parse(localStorage.getItem("product"));
+      let localStorageData = JSON.parse(localStorage.getItem('product'));
       // JSON.parse sert à convertir les données au format JSON dans le local storage en objet javascript
 
       const confirmMessage = () => {
@@ -88,15 +90,15 @@ function hydrateArticle(article) {
             `${selectedQuantity} ${article.name} de couleur ${selectedColor} a bien été ajouté au panier`
           )
         ) {
-          window.location.href = "../html/cart.html";
+          window.location.href = '../html/cart.html';
         } else {
-          window.location.href = "../html/index.html";
+          window.location.href = '../html/index.html';
         }
       };
       // Si il y a déjà des produits dans le local storage
       if (localStorageData) {
         localStorageData.push(userValue);
-        localStorage.setItem("product", JSON.stringify(localStorageData));
+        localStorage.setItem('product', JSON.stringify(localStorageData));
         console.log(localStorageData);
         confirmMessage();
       }
@@ -104,7 +106,7 @@ function hydrateArticle(article) {
       else {
         localStorageData = [];
         localStorageData.push(userValue);
-        localStorage.setItem("product", JSON.stringify(localStorageData));
+        localStorage.setItem('product', JSON.stringify(localStorageData));
         confirmMessage();
       }
     }
