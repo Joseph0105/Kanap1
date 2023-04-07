@@ -90,9 +90,9 @@ function hydrateArticle(article) {
             `${selectedQuantity} ${article.name} de couleur ${selectedColor} a bien été ajouté au panier`
           )
         ) {
-          window.location.href = './html/cart.html';
+          window.location.href = './cart.html';
         } else {
-          window.location.href = './html/index.html';
+          window.location.href = './index.html';
         }
       };
       // Si il y a déjà des produits dans le local storage
