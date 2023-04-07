@@ -29,6 +29,10 @@ Il a fallu communiquer avec une API et récupérer des informations spécifiques
 
 J'ai appris à afficher dynamiquement des éléments sur une page en utilisant createElement, par exemple, ou textContent pour remplir du texte.
 
+### Hébergement du backend
+
+Pour ce projet je n'ai pas l'héberger simplement sur github Pages comme les autres, car le serveur et la base de donnée (Mondo DB) tourne sur Node.js, j'ai doc héberger le back end sur Heroku. le front lui est toujours sur github Pages, qui remplis mes besoins actuel.
+
 ## Conclusion
 
 Ce projet fut un excellent exercice pour confirmer mes connaissances en JavaScript natif. Bonne visite !
