@@ -3,7 +3,7 @@
 /*********/
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   color: white;
   min-width: 300px;
@@ -126,7 +126,7 @@ main {
   flex-wrap: wrap;
 }
 .items a {
-  width: 21%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,10 +148,11 @@ main {
 }
 .items article img {
   align-self: center;
-  width: 25rem;
+  width: 100%;
   height: 20rem;
   object-fit: cover;
   border-radius: 10px;
+  object-fit: cover;
 }
 .items article h3 {
   font-size: 22px;
@@ -178,7 +179,7 @@ main {
   white-space: normal;
 }
 .items article #productPrice {
-  border-radius: 10%;
+  border-radius: 10px;
   background-color: #3498db;
   width: 30%;
   align-self: center;
@@ -229,7 +230,7 @@ footer .footerSecondary {
     justify-content: space-around;
   }
   .items a {
-    width: 42%;
+    width: 80%;
   }
   .footerMain .limitedWidthBlock {
     display: flex;
