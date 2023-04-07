@@ -1,5 +1,3 @@
-# P5# Projet 5 - Formation OpenClassrooms
-
 #Bienvenue sur le projet 5 de la formation OpenClassrooms ! C'est le premier projet où je travaille avec un backend.
 
 ## Implémentation dynamique
