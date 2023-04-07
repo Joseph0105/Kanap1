@@ -25,6 +25,10 @@ Par exemple, la gestion du local storage pour stocker des informations du client
 
 Il a fallu communiquer avec une API et récupérer des informations spécifiques. J'ai utilisé la méthode FETCH ici, avec la requête GET pour obtenir des informations et la requête POST pour envoyer la commande au backend.
 
+### Vérification d'information
+
+J'ai utilisé des REGEX pour vérifier si les données de l'utilisateur sont correctes (nom, email, téléphone...)
+
 ### Affichage dynamique
 
 J'ai appris à afficher dynamiquement des éléments sur une page en utilisant createElement, par exemple, ou textContent pour remplir du texte.
